@@ -6,7 +6,6 @@ public class ClienteParticular extends Cliente {
 
     @Override
     public void realizarReserva(Habitacion habitacion) {
-        // Lógica para realizar la reserva de una habitación
         System.out.println("Cliente privado " + getNombre() + " ha reservado la habitación " + habitacion.getNumero());
     }
 }

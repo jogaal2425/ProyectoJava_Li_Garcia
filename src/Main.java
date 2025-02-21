@@ -24,7 +24,7 @@ public class Main {
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-            scanner.nextLine();  // Limpiar buffer
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1: // Registrar Cliente
@@ -51,7 +51,7 @@ public class Main {
                     break;
 
                 case 2: // Gestionar Habitaciones
-                    System.out.println("1. Agregar habitación\n2. Listar habitaciones");
+                    System.out.println("1. Agregar habitación\n2. Listar habitaciones\n3. Volver atrás");
                     int subOpcion = scanner.nextInt();
                     scanner.nextLine();
 
@@ -80,12 +80,15 @@ public class Main {
                                 break;
                         }
 
-                        if (tipoHabitacion != null) { // Solo agregamos la habitación si el tipo es válido
+                        if (tipoHabitacion != null) {
                             hotel.agregarHabitacion(new Habitacion(numero, tipoHabitacion, precio));
                         }
                     } else if (subOpcion == 2) {
                         hotel.listarHabitaciones();
-                    } else {
+                    } else if (subOpcion == 3) {
+                        System.out.println("Volviendo al menú principal...");
+                        break;
+                    }else {
                         System.out.println("Opción no válida.");
                     }
                     break;
@@ -117,16 +120,15 @@ public class Main {
                                 hotel.agregarReserva(new Reserva(clienteReserva, habitacionReserva, fechaInicioCal, fechaFinCal));
                                 habitacionReserva.reservar();
 
-                                // Preguntar si desea agregar un servicio adicional
                                 System.out.println("¿Desea agregar un servicio adicional? (1. Sí | 2. No)");
                                 int opcionServicio = scanner.nextInt();
-                                scanner.nextLine(); // Limpiar buffer
+                                scanner.nextLine();
 
                                 if (opcionServicio == 1) {
-                                    hotel.listarServicios(); // Mostrar los servicios disponibles
+                                    hotel.listarServicios();
                                     System.out.print("Seleccione el ID del servicio a agregar: ");
                                     int servicioSeleccionado = scanner.nextInt();
-                                    scanner.nextLine(); // Limpiar buffer
+                                    scanner.nextLine();
 
                                     if (servicioSeleccionado > 0 && servicioSeleccionado <= hotel.getServicios().size()) {
                                         ServicioAdicional servicio = hotel.getServicios().get(servicioSeleccionado - 1);
@@ -146,16 +148,16 @@ public class Main {
                     }
                     break;
 
-                case 4: // Generar Informe
+                case 4:
                     hotel.generarInforme();
                     break;
 
-                case 5: // Ver Clientes Registrados
+                case 5:
                     hotel.listarClientes();
                     break;
 
-                case 6: // Gestionar Empleados
-                    System.out.println("1. Agregar empleado\n2. Listar empleados");
+                case 6:
+                    System.out.println("1. Agregar empleado\n2. Listar empleados\n3. Volver atrás");
                     int subOpcionEmp = scanner.nextInt();
                     scanner.nextLine();
 
@@ -171,13 +173,16 @@ public class Main {
                         hotel.agregarEmpleado(new Empleado(id, nombreEmp, puesto));
                     } else if (subOpcionEmp == 2) {
                         hotel.listarEmpleados();
-                    } else {
+                    } else if (subOpcionEmp == 3) {
+                        System.out.println("Volviendo al menú principal...");
+                        break;
+                    }else {
                         System.out.println("Opción no válida.");
                     }
                     break;
 
-                case 7: // Gestionar Servicios Adicionales
-                    System.out.println("1. Agregar servicio\n2. Listar servicios");
+                case 7:
+                    System.out.println("1. Agregar servicio\n2. Listar servicios\n3. Volver atrás");
                     int subOpcionServ = scanner.nextInt();
                     scanner.nextLine();
 
@@ -190,6 +195,9 @@ public class Main {
                         hotel.agregarServicio(new ServicioAdicional(nombreServ, precio));
                     } else if (subOpcionServ == 2) {
                         hotel.listarServicios();
+                    } else if (subOpcionServ == 3) {
+                        System.out.println("Volviendo al menú principal...");
+                        break;
                     } else {
                         System.out.println("Opción no válida.");
                     }

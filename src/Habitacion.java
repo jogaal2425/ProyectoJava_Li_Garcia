@@ -7,6 +7,7 @@ public class Habitacion implements Reservable {
     public enum TipoHabitacion {
         INDIVIDUAL, DOBLE, SUITE
     }
+
     // Constructor
     public Habitacion(int numero, TipoHabitacion tipo, double precio) {
         this.numero = numero;

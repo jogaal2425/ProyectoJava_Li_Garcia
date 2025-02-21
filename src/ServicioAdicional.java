@@ -1,12 +1,12 @@
 public class ServicioAdicional {
-    private static int contadorId = 1;  // Contador estático para generar IDs únicos
-    private int id;  // Campo para almacenar el ID del servicio
+    private static int contadorId = 1;
+    private int id;
     private String nombre;
     private double precio;
 
     // Constructor
     public ServicioAdicional(String nombre, double precio) {
-        this.id = contadorId++;  // Asignar el ID y luego incrementar el contador
+        this.id = contadorId++;
         this.nombre = nombre;
         this.precio = precio;
     }
