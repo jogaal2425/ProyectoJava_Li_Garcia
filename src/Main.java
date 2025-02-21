@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,13 +35,16 @@ public class Main {
                     String dni = scanner.nextLine();
                     System.out.print("Introduce nombre del cliente: ");
                     String nombre = scanner.nextLine();
+                    System.out.print("Introduce telefono del cliente: ");
+                    int telCliente = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.print("Introduce email del cliente: ");
                     String email = scanner.nextLine();
 
                     if (tipoCliente == 1) {
-                        hotel.agregarCliente(new ClienteParticular(dni, nombre, email));
+                        hotel.agregarCliente(new ClienteParticular(dni, nombre, telCliente, email));
                     } else if (tipoCliente == 2) {
-                        hotel.agregarCliente(new ClienteEmpresa(dni, nombre, email));
+                        hotel.agregarCliente(new ClienteEmpresa(dni, nombre, telCliente, email));
                     } else {
                         System.out.println("Opción no válida.");
                     }
@@ -55,12 +59,30 @@ public class Main {
                         System.out.print("Introduce el número de habitación: ");
                         int numero = scanner.nextInt();
                         scanner.nextLine();
-                        System.out.print("Introduce el tipo de habitación: ");
-                        String tipoHabitacion = scanner.nextLine();
-                        System.out.print("Introduce el estado de la habitación: ");
-                        String estadoHabitacion = scanner.nextLine();
+                        System.out.println("Selecciona el tipo de habitación: 1. Individual | 2. Doble | 3. Suite");
+                        int tipo = scanner.nextInt();
+                        System.out.print("Introduce el precio de la habitación: ");
+                        double precio = scanner.nextDouble();
 
-                        hotel.agregarHabitacion(new Habitacion(numero, tipoHabitacion, estadoHabitacion));
+                        Habitacion.TipoHabitacion tipoHabitacion = null;
+                        switch (tipo) {
+                            case 1:
+                                tipoHabitacion = Habitacion.TipoHabitacion.INDIVIDUAL;
+                                break;
+                            case 2:
+                                tipoHabitacion = Habitacion.TipoHabitacion.DOBLE;
+                                break;
+                            case 3:
+                                tipoHabitacion = Habitacion.TipoHabitacion.SUITE;
+                                break;
+                            default:
+                                System.out.println("Opción no válida.");
+                                break;
+                        }
+
+                        if (tipoHabitacion != null) { // Solo agregamos la habitación si el tipo es válido
+                            hotel.agregarHabitacion(new Habitacion(numero, tipoHabitacion, precio));
+                        }
                     } else if (subOpcion == 2) {
                         hotel.listarHabitaciones();
                     } else {
@@ -75,7 +97,7 @@ public class Main {
                     scanner.nextLine();
                     Habitacion habitacionReserva = hotel.buscarHabitacionPorNumero(numeroHabitacion);
 
-                    if (habitacionReserva != null) {
+                    if (habitacionReserva != null && habitacionReserva.disponibilidad()) {
                         System.out.print("Introduce el DNI del cliente: ");
                         String dniCliente = scanner.nextLine();
                         Cliente clienteReserva = hotel.buscarClientePorDni(dniCliente);
@@ -93,6 +115,26 @@ public class Main {
                                 fechaFinCal.setTime(sdf.parse(fechaFin));
 
                                 hotel.agregarReserva(new Reserva(clienteReserva, habitacionReserva, fechaInicioCal, fechaFinCal));
+                                habitacionReserva.reservar();
+
+                                // Preguntar si desea agregar un servicio adicional
+                                System.out.println("¿Desea agregar un servicio adicional? (1. Sí | 2. No)");
+                                int opcionServicio = scanner.nextInt();
+                                scanner.nextLine(); // Limpiar buffer
+
+                                if (opcionServicio == 1) {
+                                    hotel.listarServicios(); // Mostrar los servicios disponibles
+                                    System.out.print("Seleccione el ID del servicio a agregar: ");
+                                    int servicioSeleccionado = scanner.nextInt();
+                                    scanner.nextLine(); // Limpiar buffer
+
+                                    if (servicioSeleccionado > 0 && servicioSeleccionado <= hotel.getServicios().size()) {
+                                        ServicioAdicional servicio = hotel.getServicios().get(servicioSeleccionado - 1);
+                                        clienteReserva.solicitarServicio(servicio);
+                                    } else {
+                                        System.out.println("Opción de servicio no válida.");
+                                    }
+                                }
                             } catch (ParseException e) {
                                 System.out.println("Error al parsear las fechas.");
                             }

@@ -1,6 +1,6 @@
 public class ClienteEmpresa extends Cliente {
-    public ClienteEmpresa(String dni, String nombre, String email) {
-        super(dni, nombre, email);
+    public ClienteEmpresa(String dni, String nombre, int telCliente, String email) {
+        super(dni, nombre, telCliente, email);
     }
 
     @Override

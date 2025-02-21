@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Scanner;
 
 public class Hotel {
     private String nombre;
@@ -43,7 +44,7 @@ public class Hotel {
         for (Habitacion habitacion : habitaciones) {
             System.out.println("Número: " + habitacion.getNumero() +
                     " | Tipo: " + habitacion.getTipo() +
-                    " | Estado: " + habitacion.getEstado());
+                    " | Precio: " + habitacion.getPrecio());
         }
     }
 
@@ -98,6 +99,7 @@ public class Hotel {
         for (Cliente cliente : clientes) {
             System.out.println("DNI: " + cliente.getDni() +
                     " | Nombre: " + cliente.getNombre() +
+                    " | TelCliente: " + cliente.getTelCliente() +
                     " | Email: " + cliente.getEmail());
         }
     }
@@ -134,10 +136,12 @@ public class Hotel {
             return;
         }
         for (ServicioAdicional servicio : servicios) {
-            System.out.println("Nombre: " + servicio.getNombre() +
+            System.out.println("ID: " + servicio.getId() +
+                    " | Nombre: " + servicio.getNombre() +
                     " | Precio: " + servicio.getPrecio());
         }
     }
+
 
     // Método para generar un informe general del hotel
     public void generarInforme() {
@@ -205,4 +209,28 @@ public class Hotel {
         }
         return null;
     }
+
+    public void solicitarServicioAdicional(String dniCliente) {
+        Cliente cliente = buscarClientePorDni(dniCliente);
+        if (cliente != null) {
+            System.out.println("Servicios disponibles:");
+            for (int i = 0; i < servicios.size(); i++) { // Cambiado serviciosAdicionales por servicios
+                ServicioAdicional servicio = servicios.get(i); // Aquí también
+                System.out.println((i + 1) + ". " + servicio.getNombre() + " - Precio: " + servicio.getPrecio());
+            }
+
+            System.out.print("Seleccione el ID del servicio que desea solicitar: ");
+            Scanner scanner = new Scanner(System.in);
+            int opcion = scanner.nextInt();
+            if (opcion > 0 && opcion <= servicios.size()) {
+                ServicioAdicional servicioSeleccionado = servicios.get(opcion - 1);
+                cliente.solicitarServicio(servicioSeleccionado);
+            } else {
+                System.out.println("Opción no válida.");
+            }
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
+    }
+
 }
