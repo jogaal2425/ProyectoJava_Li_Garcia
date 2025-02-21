@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Hotel {
     private String nombre;
@@ -24,7 +23,6 @@ public class Hotel {
         this.clientes = new ArrayList<>();
     }
 
-    // Métodos para gestionar habitaciones
     public void agregarHabitacion(Habitacion habitacion) {
         if (habitaciones.contains(habitacion)) {
             System.out.println("Error: La habitación ya existe.");
@@ -151,7 +149,6 @@ public class Hotel {
         System.out.println("Total de Servicios Adicionales: " + servicios.size());
     }
 
-    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -195,6 +192,16 @@ public class Hotel {
     public void agregarCliente(Cliente cliente) {
         clientes.add(cliente);
         System.out.println("Cliente agregado: " + cliente.getNombre());
+    }
+
+    public void eliminarCliente(String dni) {
+        Cliente cliente = buscarClientePorDni(dni);
+        if (cliente != null) {
+            clientes.remove(cliente);
+            System.out.println("Cliente con DNI " + dni + " eliminado correctamente.");
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
     }
 
     public Cliente buscarClientePorDni(String dni) {

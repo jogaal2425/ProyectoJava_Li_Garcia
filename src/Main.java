@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -154,6 +153,14 @@ public class Main {
 
                 case 5:
                     hotel.listarClientes();
+                    System.out.println("¿Quieres eliminar un cliente? (1. Sí | 2. No)");
+                    int opcionEliminar = scanner.nextInt();
+                    scanner.nextLine();
+                    if (opcionEliminar == 1) {
+                        System.out.print("Introduce el DNI del cliente a eliminar: ");
+                        String dniEliminar = scanner.nextLine();
+                        hotel.eliminarCliente(dniEliminar);
+                    }
                     break;
 
                 case 6:
