@@ -1,9 +1,18 @@
+/**
+ * Clase que representa un servicio adicional en el hotel.
+ */
 public class ServicioAdicional {
     private static int contadorId = 1;
     private int id;
     private String nombre;
     private double precio;
 
+    /**
+     * Constructor de ServicioAdicional.
+     * @param nombre Nombre del servicio adicional.
+     * @param precio Precio del servicio.
+     */
+    
     // Constructor
     public ServicioAdicional(String nombre, double precio) {
         this.id = contadorId++;

@@ -1,7 +1,17 @@
+/**
+ * Clase que representa a un empleado del hotel.
+ */
 public class Empleado {
     private int id;
     private String nombre;
     private String puesto;
+
+    /**
+     * Constructor de la clase Empleado.
+     * @param id Identificación del empleado.
+     * @param nombre Nombre del empleado.
+     * @param puesto Puesto que ocupa en el hotel.
+     */
 
     // Constructor
     public Empleado(int id, String nombre, String puesto) {

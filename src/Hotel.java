@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
-
+/**
+ * Representa un hotel con habitaciones, empleados, reservas, servicios adicionales y clientes.
+ */
 public class Hotel {
     private String nombre;
     private String direccion;
@@ -11,6 +13,13 @@ public class Hotel {
     private ArrayList<ServicioAdicional> servicios;
     private ArrayList<Cliente> clientes = new ArrayList<>();
 
+    /**
+     * Constructor de la clase Hotel.
+     *
+     * @param nombre El nombre del hotel.
+     * @param direccion La dirección del hotel.
+     * @param telefono El teléfono del hotel.
+     */
     // Constructor
     public Hotel(String nombre, String direccion, String telefono) {
         this.nombre = nombre;
@@ -23,6 +32,11 @@ public class Hotel {
         this.clientes = new ArrayList<>();
     }
 
+    /**
+     * Agrega una nueva habitación al hotel.
+     *
+     * @param habitacion La habitación a agregar.
+     */
     public void agregarHabitacion(Habitacion habitacion) {
         if (habitaciones.contains(habitacion)) {
             System.out.println("Error: La habitación ya existe.");
@@ -32,6 +46,9 @@ public class Hotel {
         System.out.println("Habitación " + habitacion.getTipo() + " agregada al hotel.");
     }
 
+    /**
+     * Muestra un listado de todas las habitaciones registradas en el hotel.
+     */
     public void listarHabitaciones() {
         System.out.println("--- Listado de Habitaciones ---");
         if (habitaciones.isEmpty()) {
@@ -45,6 +62,12 @@ public class Hotel {
         }
     }
 
+    /**
+     * Busca una habitación por su número.
+     *
+     * @param numero El número de la habitación a buscar.
+     * @return La habitación encontrada, o null si no se encuentra.
+     */
     public Habitacion buscarHabitacionPorNumero(int numero) {
         for (Habitacion habitacion : habitaciones) {
             if (habitacion.getNumero() == numero) {
@@ -54,6 +77,11 @@ public class Hotel {
         return null;
     }
 
+    /**
+     * Agrega un nuevo empleado al hotel.
+     *
+     * @param empleado El empleado a agregar.
+     */
     // Métodos para gestionar empleados
     public void agregarEmpleado(Empleado empleado) {
         if (empleados.contains(empleado)) {
@@ -63,7 +91,9 @@ public class Hotel {
         empleados.add(empleado);
         System.out.println("Empleado " + empleado.getNombre() + " agregado al hotel.");
     }
-
+    /**
+     * Muestra un listado de todos los empleados registrados en el hotel.
+     */
     public void listarEmpleados() {
         System.out.println("--- Listado de Empleados ---");
         if (empleados.isEmpty()) {
@@ -77,6 +107,11 @@ public class Hotel {
         }
     }
 
+    /**
+     * Agrega una nueva reserva al hotel.
+     *
+     * @param reserva La reserva a agregar.
+     */
     public void agregarReserva(Reserva reserva) {
         if (reservas.contains(reserva)) {
             System.out.println("Error: La reserva ya existe.");
@@ -86,6 +121,9 @@ public class Hotel {
         System.out.println("Reserva agregada para el cliente: " + reserva.getCliente().getNombre());
     }
 
+    /**
+     * Muestra un listado de todos los clientes registrados en el hotel.
+     */
     public void listarClientes() {
         System.out.println("--- Listado de Clientes ---");
         if (clientes.isEmpty()) {
@@ -100,6 +138,9 @@ public class Hotel {
         }
     }
 
+    /**
+     * Muestra un listado de todas las reservas realizadas en el hotel.
+     */
     public void listarReservas() {
         System.out.println("--- Listado de Reservas ---");
         if (reservas.isEmpty()) {
@@ -115,6 +156,11 @@ public class Hotel {
         }
     }
 
+    /**
+     * Agrega un nuevo servicio adicional al hotel.
+     *
+     * @param servicio El servicio adicional a agregar.
+     */
     // Métodos para gestionar servicios adicionales
     public void agregarServicio(ServicioAdicional servicio) {
         if (servicios.contains(servicio)) {
@@ -125,6 +171,9 @@ public class Hotel {
         System.out.println("Servicio adicional " + servicio.getNombre() + " agregado.");
     }
 
+    /**
+     * Muestra un listado de todos los servicios adicionales disponibles en el hotel.
+     */
     public void listarServicios() {
         System.out.println("--- Listado de Servicios Adicionales ---");
         if (servicios.isEmpty()) {
@@ -138,6 +187,9 @@ public class Hotel {
         }
     }
 
+    /**
+     * Genera un informe general del hotel, mostrando la información relevante.
+     */
     public void generarInforme() {
         System.out.println("--- Informe General del Hotel ---");
         System.out.println("Nombre: " + nombre);
@@ -149,6 +201,7 @@ public class Hotel {
         System.out.println("Total de Servicios Adicionales: " + servicios.size());
     }
 
+    // Métodos getters y setters para los atributos de la clase
     public String getNombre() {
         return nombre;
     }
